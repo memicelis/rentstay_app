@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ["Roboto", ...defaultTheme.fontFamily.sans],
       },
+      backgroundImage: {
+        "hero-pattern": "url('/assets/night-in-sarajevo.jpg')",
+      },
     },
   },
   plugins: [
