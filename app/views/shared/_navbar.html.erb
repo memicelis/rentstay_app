@@ -1,0 +1,29 @@
+<% items = [
+  ["Houses", houses_path, "icons/house.svg"],
+  ["Favourites", favourites_path, "icons/heart.svg"],
+  ["Add house", add_house_path, "icons/plus-circle.svg"],
+  ["Delete house", delete_house_path, "icons/minus-circle.svg"]
+] %>
+
+<!-- Navbar with a button to toggle mobile menu -->
+<div class="flex flex-col container bg-blue-500 md:hidden" data-controller="mobile-menu">
+  <div class="flex items-center justify-between p-2">
+  <%= inline_svg_tag "icons/logo.svg", class: 'h-4 text-white' %>
+  <button data-action="click->mobile-menu#toggleMenu" class=""><%= inline_svg_tag "icons/bars-3.svg", class: 'h-4 text-white' %></button>
+  </div>
+
+
+  <div id="mobile-menu" class="hidden md:hidden"  data-mobile-menu-target="menu">
+    <!-- Mobile menu items -->
+    <ul class="block h-screen bg-gray-800">
+      <% items.each do |text, path, icon| %>
+        <li class="px-4 py-2 flex items-center">
+        <span class="mr-2 hover:text-gray-300">
+          <%= inline_svg_tag icon, class: 'h-4 text-white' %>
+          </span>
+          <%= link_to text, path, class: "block text-white" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
