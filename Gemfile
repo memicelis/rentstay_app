@@ -72,3 +72,5 @@ gem 'rubocop'
 gem 'tailwindcss-rails'
 
 gem 'inline_svg'
+
+gem 'htmlbeautifier'
