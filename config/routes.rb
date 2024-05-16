@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get :houses
     get :favourites
     get :add_house
-    get :delete_house
+    post :create_house
+    delete 'houses/:id', to: 'main#delete_house', as: :delete_house
   end
 end

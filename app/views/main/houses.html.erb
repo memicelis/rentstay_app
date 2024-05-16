@@ -1,1 +1,16 @@
 <h1>Houses </h1>
+
+<% @houses.each do |house| %>
+  <div class="house flex items-center w-full flex-wrap">
+    <h2><%= house.title %></h2>
+    <p><%= house.description %></p>
+    <p>Price: <%= number_to_currency(house.price) %></p>
+    <p>Availability: <%= house.availability ? 'Available' : 'Not available' %></p>
+    <% if house.images.attached? %>
+      <h3>Images:</h3>
+      <% house.images.each do |image| %>
+        <%= image_tag image %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
