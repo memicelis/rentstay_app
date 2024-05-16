@@ -2,16 +2,31 @@
 
 <h1>Add a New House</h1>
 
-<!-- Your form for adding a new house goes here -->
-<%= form_for @house do |f| %>
+<%= form_for @house, url: create_house_path, html: { multipart: true } do |f| %>
   <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
   </div>
 
   <div class="field">
     <%= f.label :description %>
     <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_area :price %>
+  </div>
+
+  <div class="field">
+  <%= f.label :availability %>
+  <%= f.select :availability, options_for_select([[true, 'Available'], [false, 'Not available']]) %>
+</div>
+
+  <!-- File input field for uploading images -->
+  <div class="field">
+    <%= f.label :images, 'Upload Images' %>
+    <%= f.file_field :images, multiple: true %>
   </div>
 
   <%= f.submit "Add House" %>
