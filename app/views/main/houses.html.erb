@@ -1,16 +1,21 @@
-<h1>Houses </h1>
-
-<% @houses.each do |house| %>
-  <div class="house flex items-center w-full flex-wrap">
-    <h2><%= house.title %></h2>
-    <p><%= house.description %></p>
-    <p>Price: <%= number_to_currency(house.price) %></p>
-    <p>Availability: <%= house.availability ? 'Available' : 'Not available' %></p>
-    <% if house.images.attached? %>
-      <h3>Images:</h3>
-      <% house.images.each do |image| %>
-        <%= image_tag image %>
-      <% end %>
+<h1>Houses</h1>
+<div class="swiper h-90vh" data-controller="swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <% @houses.each do |house| %>
+      <div class="swiper-slide flex items-center w-full h-9/10 flex-wrap">
+        <% if house.images.attached? %>
+          <% house.images.each do |image| %>
+            <div class="relative w-full h-full bg-cover bg-center flex flex-grow" style="background-image: url('<%= url_for(image) %>');">
+              <div class="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white p-4">
+                <h2 class="text-lg font-bold"><%= house.title %></h2>
+                <p>Price: <%= number_to_currency(house.price) %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
-<% end %>
+  <!-- If we need pagination -->
+</div>
