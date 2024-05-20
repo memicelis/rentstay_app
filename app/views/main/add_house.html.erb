@@ -1,26 +1,26 @@
 <!-- app/views/main/add_house.html.erb -->
 <h1>Add a New House</h1>
 <%= form_for @house, url: create_house_path, html: { multipart: true } do |f| %>
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="flex flex-col"><%= f.label :title %> <%= f.text_field :title %></div>
+  <div class="flex flex-col">
+    <%= f.label :description %> <%= f.text_area :description %>
   </div>
+  <div class="flex flex-col"><%= f.label :price %> <%= f.text_area :price %></div>
   <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_area :price %>
-  </div>
-  <div class="field">
-    <%= f.label :availability %>
-    <%= f.select :availability, options_for_select([[true, 'Available'], [false, 'Not available']]) %>
+    <%= f.label :availability %> <%= f.select :availability,
+  options_for_select([[true, 'Available'], [false, 'Not available']]) %>
   </div>
   <!-- File input field for uploading images -->
-  <div class="field">
-    <%= f.label :images, 'Upload Images' %>
-    <%= f.file_field :images, multiple: true %>
+  <div class="field" data-controller="photo-preview">
+    <%= f.label :images, 'Upload Images' %> <%= f.file_field :images, multiple: true, direct_upload: true, data:{ photo_preview_target: "input", action:
+  "change->photo-preview#preview"} %>
+    <div class="w-36 h-36">
+      <%if @house.images.attached? %>
+        <%= image_tag @house.images, data: { photo_preview_target: "preview" }, class: "w-w-36 h-36" %>
+      <% else %>
+        <%= image_tag "image_placeholder", alt: "Image Preview", data: { photo_preview_target: "preview" }, class: "w-36 h-36" %>
+      <% end %>
+    </div>
   </div>
   <%= f.submit "Add House" %>
 <% end %>
