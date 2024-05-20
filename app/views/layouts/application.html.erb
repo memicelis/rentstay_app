@@ -9,7 +9,7 @@
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   </head>
-  <body class="overflow-hidden">
+  <body class="<%= 'overflow-hidden' if current_page?(houses_path) %>">
     <%= render "shared/navbar" %>
     <main class="container mx-auto px-5">
       <%= yield %>
