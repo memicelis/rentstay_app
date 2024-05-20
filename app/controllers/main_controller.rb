@@ -12,7 +12,7 @@ class MainController < ApplicationController
   def create_house
     @house = House.new(house_params)
     if @house.save
-      redirect_to root_path, notice: 'House was successfully added.'
+      redirect_to houses_path, notice: 'House was successfully added.'
     else
       render :add_house
     end
