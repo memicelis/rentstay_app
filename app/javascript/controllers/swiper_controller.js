@@ -4,6 +4,10 @@ export default class extends Controller {
   connect() {
     const swiper = new Swiper(".swiper", {
       zoom: true,
+      mousewheel: true,
+      keyboard: {
+        enabled: true,
+      },
       freeMode: true,
       slidesPerView: 1.2,
       spaceBetween: 50,
