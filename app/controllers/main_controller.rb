@@ -24,6 +24,21 @@ class MainController < ApplicationController
     redirect_to houses_path, notice: 'House successfully deleted.'
   end
 
+  def toggle_favourite
+    @house = House.find(params[:id])
+    @house.update(favourite: !@house.favourite)
+
+    @houses = House.favourites
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('favourites', template: 'main/favourites') }
+    end
+  end
+
+  def favourites
+    @houses = House.favourites
+  end
+
   private
 
   def house_params
