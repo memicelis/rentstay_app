@@ -26,9 +26,7 @@ class MainController < ApplicationController
 
   def toggle_favourite
     @house = House.find(params[:id])
-    @house.update(favourite: !@house.favourite)
-
-    @houses = House.favourites
+    @houses = @house.toggle_favourite!
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace('favourites', template: 'main/favourites') }
