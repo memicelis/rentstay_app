@@ -1,1 +1,23 @@
-<h1> Favourites </h1>
+<h1>Favourites</h1>
+<%= turbo_frame_tag "favourites" do %>
+  <div class="swiper h-90vh" data-controller="swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <% @houses.each do |house| %>
+        <div class="swiper-slide flex items-center w-full h-9/10 flex-wrap">
+          <% house.images.each do |image| %>
+            <div class="relative w-full h-full bg-cover bg-center flex flex-grow" style="background-image: url('<%= url_for(image) %>');">
+              <div class="absolute flex justify-between bottom-0 left-0 w-full bg-black bg-opacity-50 text-white p-4">
+                <div>
+                  <h2 class="text-lg font-bold"><%= house.title %></h2>
+                  <p>Price: <%= number_to_currency(house.price) %></p>
+                </div>
+                <%= inline_svg_tag "icons/heart", class: "text-white h-4 w-4 cursor-pointer #{"fill-white" if house.favourite?}", data: { controller: "favourite", action: "click->favourite#toggleFill", house_id: house.id } %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
