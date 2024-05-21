@@ -12,7 +12,7 @@ class MainController < ApplicationController
   def create_house
     @house = House.new(house_params)
     if @house.save
-      redirect_to root_path, notice: 'House was successfully added.'
+      redirect_to houses_path, notice: 'House was successfully added.'
     else
       render :add_house
     end
@@ -22,6 +22,19 @@ class MainController < ApplicationController
     @house = House.find(params[:id])
     @house.destroy
     redirect_to houses_path, notice: 'House successfully deleted.'
+  end
+
+  def toggle_favourite
+    @house = House.find(params[:id])
+    @houses = @house.toggle_favourite!
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('favourites', template: 'main/favourites') }
+    end
+  end
+
+  def favourites
+    @houses = House.favourites
   end
 
   private

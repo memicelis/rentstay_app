@@ -7,9 +7,9 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" %>
   </head>
-  <body class="">
+  <body class="<%= 'overflow-hidden' if current_page?(houses_path) %>">
     <%= render "shared/navbar" %>
     <main class="container mx-auto px-5">
       <%= yield %>

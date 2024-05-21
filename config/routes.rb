@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get :favourites
     get :add_house
     post :create_house
+    patch 'houses/:id/toggle_favourite', to: 'main#toggle_favourite', as: :toggle_favourite
     delete 'houses/:id', to: 'main#delete_house', as: :delete_house
   end
 end
